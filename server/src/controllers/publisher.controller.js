@@ -5,7 +5,7 @@ const ApiError = require('../api-error')
 function verifyToken (req, res) {
     const token = req.headers['authorization']
     return new Promise((resolve, reject) => {
-        jwt.verify(token, process.env.JWT_SECRET || 'B2203510_CT449_HKI2024-2025', (error, user) => {
+        jwt.verify(token, process.env.JWT_SECRET || 'B2203506_CT449', (error, user) => {
             if( error || !user.ChucVu ) { 
                 return reject('Unauthorized !')
             }

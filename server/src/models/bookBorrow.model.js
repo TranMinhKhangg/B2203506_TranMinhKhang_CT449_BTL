@@ -10,10 +10,10 @@ const bookBorrowSchema = mongoose.Schema(
         NgayMuon: {type: Date},
         NgayTra: {type: Date},
         SoLuongMuon: { type: Number, required: true, default: 1 },
-        TrangThai: { type: String, required: true, default: 'pending' }, 
+        TrangThai: { type: String, required: true, default: 'Đang chờ nhận sách' }, 
         //pending / borrow / paid
     },
-    { timestamps: true, minimize: false, collection:'MuonSach' },
+    { timestamps: true, minimize: false, collection:'THEODOIMUONSACH' },
 )
 
 bookBorrowSchema.plugin(AutoIncrement, { inc_field: "MaMuonSach", start_seq: 1000 });

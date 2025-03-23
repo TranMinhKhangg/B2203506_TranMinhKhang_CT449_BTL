@@ -9,7 +9,7 @@ const publisherSchema = new mongoose.Schema(
   },
   { timestamps: true,
     minimize: false,
-    collection:'NhaXuatBan' 
+    collection:'NHAXUATBAN' 
   }
 );
 

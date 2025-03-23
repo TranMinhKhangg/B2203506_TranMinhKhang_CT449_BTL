@@ -33,7 +33,9 @@ module.exports = class bookBorrowService {
             const borrow = await bookBorrowModel.findOneAndUpdate(
                 {_id : updateData._id},
                 {
-                    TrangThai: updateData.TrangThai,
+                    // TrangThai: updateData.TrangThai,
+                    // TrangThai: updateData.TrangThai === "borrow" ? "Đã lấy sách" : updateData.TrangThai,
+                    TrangThai: 'Đã lấy sách', 
                     NgayMuon: Date.now(),
                     MaNhanVien: staffId
                 },
@@ -54,7 +56,8 @@ module.exports = class bookBorrowService {
             const borrow = await bookBorrowModel.findOne({_id: updateData._id})
             const book = await bookModel.findOne({_id: borrow.MaSach}) //ma sach o day la ID
             const returnDay = Date.now()
-            borrow.TrangThai = updateData.TrangThai
+            // borrow.TrangThai = updateData.TrangThai
+            borrow.TrangThai = 'Đã trả sách'
             borrow.MaNhanVien = staffId
             borrow.NgayTra = returnDay
             await borrow.save()
@@ -81,7 +84,7 @@ module.exports = class bookBorrowService {
     }
 
     async deleteBorrowForUser(idBorrow) {
-        const deletedBorrow = await bookBorrowModel.findOneAndDelete({_id: idBorrow, TrangThai: 'pending'})
+        const deletedBorrow = await bookBorrowModel.findOneAndDelete({_id: idBorrow, TrangThai: 'peding'})
         if(deletedBorrow) {
             const book = await bookModel.findById(deletedBorrow.MaSach)
             await bookModel.findByIdAndUpdate(deletedBorrow.MaSach, {$set: {SoLuongDaMuon: book.SoLuongDaMuon -  deletedBorrow.SoLuongMuon}})
